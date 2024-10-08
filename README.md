@@ -30,61 +30,93 @@ RegisterNumber: 212223230062
 ```
 ```
 import pandas as pd
-data=pd.read_csv("C:/Users/admin/Downloads/Placement_Data.csv")
-data.head()
-
-data1=data.copy()
-data1=data1.drop(["sl_no","salary"],axis=1)
-data1.head()
-
-data1.isnull()
-
-data1.duplicated().sum()
-
-from sklearn.preprocessing import LabelEncoder
-le=LabelEncoder()
-data1["gender"]=le.fit_transform(data1["gender"])
-data1["ssc_b"]=le.fit_transform(data1["ssc_b"])
-data1["hsc_b"]=le.fit_transform(data1["hsc_b"])
-data1["hsc_s"]=le.fit_transform(data1["hsc_s"])
-data1["degree_t"]=le.fit_transform(data1["degree_t"])
-data1["workex"]=le.fit_transform(data1["workex"])
-data1["specialisation"]=le.fit_transform(data1["specialisation"])
-data1["status"]=le.fit_transform(data1["status"])
-data1
-
-x=data1.iloc[:,:-1]
-x
-
-y=data1["status"]
-y
-
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
-
 from sklearn.linear_model import LogisticRegression
-lr=LogisticRegression(solver="liblinear") #libraryfor large linear classificiation
-lr.fit(x_train,y_train)
-y_pred=lr.predict(x_test)
-y_pred
-
-from sklearn.metrics import accuracy_score
-accuracy=accuracy_score(y_test,y_pred)
-accuracy
-
-from sklearn.metrics import classification_report
-classification_report1=classification_report(y_test,y_pred)
-print(classification_report1)
-
-lr.predict([[1,80,1,90,1,1,90,1,0,85,1,85]])
-
+```
+```
+dataset=pd.read_csv('Placement.csv')
+print(dataset)
 ```
 ### Output:
-### Accuracy:
+![image](https://github.com/user-attachments/assets/6cfc2506-dda5-4ebe-87b5-d4d853fb67e4)
+```
+dataset.head()
+```
+### Output:
+![image](https://github.com/user-attachments/assets/72a2d107-6866-4c3e-a457-b4e84a3ccb0e)
+```
+dataset.tail()
+```
+### Output:
+![image](https://github.com/user-attachments/assets/1578f963-87ee-4a1b-b94e-0d3be2f13730)
+```
+dataset.info()
+```
+### Output:
+![image](https://github.com/user-attachments/assets/76d2a3b0-4012-44f1-b6f8-deda4cc94001)
 
-### Prediction:
+```
+dataset.drop('sl_no',axis=1,inplace=True)
+dataset.info()
+```
+### Output:
+![image](https://github.com/user-attachments/assets/641e9186-5554-4008-92c6-9cbe54af7ee8)
+```
+dataset["gender"]=dataset["gender"].astype('category')
+dataset["ssc_b"]=dataset["ssc_b"].astype('category')
+dataset["hsc_b"]=dataset["hsc_b"].astype('category')
+dataset["degree_t"]=dataset["degree_t"].astype('category')
+dataset["workex"]=dataset["workex"].astype('category')
+dataset["specialisation"]=dataset["specialisation"].astype('category')
+dataset["status"]=dataset["status"].astype('category')
+dataset["hsc_s"]=dataset["hsc_s"].astype('category')
+dataset.dtypes
+```
+### Output:
+![image](https://github.com/user-attachments/assets/ab4af9f5-aa7a-46c5-ad6a-85f76e628713)
+```
+dataset["gender"]=dataset["gender"].cat.codes
+dataset["ssc_b"]=dataset["ssc_b"].cat.codes
+dataset["hsc_b"]=dataset["hsc_b"].cat.codes
+dataset["degree_t"]=dataset["degree_t"].cat.codes
+dataset["workex"]=dataset["workex"].cat.codes
+dataset["specialisation"]=dataset["specialisation"].cat.codes
+dataset["status"]=dataset["status"].cat.codes
+dataset["hsc_s"]=dataset["hsc_s"].cat.codes
+```
+```
+dataset.info()
+```
+### Output:
+![image](https://github.com/user-attachments/assets/a3296e42-b0a2-41e5-bd3b-daa0b9fb17ee)
+```
+dataset.head()
+```
+### Output:
+![image](https://github.com/user-attachments/assets/b74d423d-2cc5-4e03-9289-b5e15ec7ca61)
+```
+x=dataset.iloc[:,:-1].values 
+x
+```
+### Output:
+![image](https://github.com/user-attachments/assets/bd93fb8b-1cf6-4521-b987-bc6ca57259ea)
+```
+y=dataset.iloc[:,-1].values
+y
+```
+### Output:
+![image](https://github.com/user-attachments/assets/97cbc1df-ba85-4283-b6e7-f657f385c44f)
+```
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=1)
+clf=LogisticRegression()
+clf.fit(x_train,y_train)
+clf.score(x_test,y_test)
+```
+### Output:
+![image](https://github.com/user-attachments/assets/1004f9fa-f28c-48f2-8c59-8f6fdfacba45)
+```
 
-
+```
 
 ### Result:
 Thus the program to implement the the Logistic Regression Model to Predict the Placement Status of Student is written and verified using python programming.
