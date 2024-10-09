@@ -32,6 +32,7 @@ RegisterNumber: 212223230062
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix,accuracy_score
 ```
 ```
 dataset=pd.read_csv('Placement.csv')
@@ -113,10 +114,22 @@ clf.fit(x_train,y_train)
 clf.score(x_test,y_test)
 ```
 ### Output:
-![image](https://github.com/user-attachments/assets/1004f9fa-f28c-48f2-8c59-8f6fdfacba45)
-```
+![image](https://github.com/user-attachments/assets/fa1465f2-eec1-4891-a338-77932b2ef409)
 
 ```
+y_pred=cf.predict(x_test)
+cf.score(x_test,y_test)
+```
+### Output:
+![image](https://github.com/user-attachments/assets/3adc550f-aec6-40e0-bc82-a3efcfab29b7)
+```
+print(cf)
+accuracy=accuracy_score(y_test,y_pred)
+print(accuracy)
+```
+### Output:
+![image](https://github.com/user-attachments/assets/39a4f7fb-bfa7-4499-a442-88b26a77ad1b)
+
 
 ### Result:
 Thus the program to implement the the Logistic Regression Model to Predict the Placement Status of Student is written and verified using python programming.
